@@ -65,6 +65,7 @@ public  abstract class Display {
 		//наша картина в буфере всей графики выводится на лист
 		buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);//статическое поле BufferedImage.TYPE_INT_ARGB
 		//информация о нашей графике вытащить  и в ставить в нашу перемкнную лист байтов изображения 
+		//вызвали  класс DataBufferInt расширения его датабуфер 
 		bufferData = ((DataBufferInt) buffer.getRaster().getDataBuffer()).getData();
 		//буфер графики туда передали наши картинки 
 		bufferGraphics = buffer.getGraphics();
