@@ -1,5 +1,6 @@
 package display;
-
+//есть экран в нем создаем классы рамку лист буфер для картинок и графический класс.
+//далее уже используем ихнии методы 
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.Arrays;
 
-import game.Main;
+import game.Game;
 import javax.swing.JFrame;
 
 // Абстрактный класс похож на обычный класс. В абстрактном классе также можно определить поля и

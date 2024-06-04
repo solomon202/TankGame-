@@ -9,7 +9,7 @@ import display.Display;
 import com.thebyteguru.graphics.TextureAtlas;
 import utils.Time;
 
-public class Main implements Runnable{
+public class Game implements Runnable{
 	public static final int		WIDTH			= 800;
 	public static final int		HEIGHT			= 600;
 	public static final String	TITLE			= "Tanks";
