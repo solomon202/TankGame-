@@ -4,9 +4,9 @@ import java.awt.Dimension;
 import display.Display;
 import java.awt.Graphics2D;
 
-import com.thebyteguru.IO.Input;
+import IO.Input;
 import display.Display;
-import com.thebyteguru.graphics.TextureAtlas;
+import graphics.TextureAtlas;
 import utils.Time;
 
 public class Game implements Runnable{
@@ -38,6 +38,7 @@ public class Game implements Runnable{
 		atlas = new TextureAtlas(ATLAS_FILE_NAME);
 		player = new Player(300, 300, 2, 3, atlas);
 	}
+	//Этот метод запускает выполнение потока,
 
 	public synchronized void start() {
 
@@ -45,8 +46,11 @@ public class Game implements Runnable{
 			return;
 
 		running = true;
+		//создем поток 
 		//Объекты, реализующие этот интерфейс, могут выполняться потоком
 		gameThread = new Thread(this);
+		
+		//Здесь поток начнет выполняться.
 		gameThread.start();
 
 	}
@@ -79,6 +83,8 @@ public class Game implements Runnable{
 	}
 	//Объекты, реализующие этот интерфейс, могут выполняться потоком
 //реализуем  метод интерфейса 
+	//При этом класс Thread уже реализует интерфейс Runnable, но с пустой реализацией метода run().Так что при создании экземпляра Thread создается поток, который ничего не делает. Поэтому в потомке надо переопределить метод run(). 
+	//В нем следует написать реализацию алгоритмов, которые должны выполняться в данном потоке. 
 	public void run() {
 
 		int fps = 0;
@@ -120,7 +126,7 @@ public class Game implements Runnable{
 					e.printStackTrace();
 				}
 			}
-
+     // функция проверки 
 			if (count >= Time.SECOND) {
 				Display.setTitle(TITLE + " || Fps: " + fps + " | Upd: " + upd + " | Updl: " + updl);
 				upd = 0;
