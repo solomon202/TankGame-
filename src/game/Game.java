@@ -1,5 +1,5 @@
 package game;
-
+//класс игра 
 import java.awt.Dimension;
 import display.Display;
 import java.awt.Graphics2D;
@@ -10,6 +10,8 @@ import graphics.TextureAtlas;
 import utils.Time;
 
 public class Game implements Runnable{
+	
+	//создаем установить  данные переменных 
 	public static final int		WIDTH			= 800;
 	public static final int		HEIGHT			= 600;
 	public static final String	TITLE			= "Tanks";
@@ -21,21 +23,30 @@ public class Game implements Runnable{
 	public static final long	IDLE_TIME		= 1;
 
 	public static final String	ATLAS_FILE_NAME	= "texture_atlas.png";
-
+	
+   //создаем сылочные переменные 
 	private boolean				running;
 	private Thread				gameThread;
 	private Graphics2D			graphics;
 	private Input				input;
 	private TextureAtlas		atlas;
 	private Player				player;
-
+	
+   //формируется сама рамка в ней картинка 
 	public Game() {
+		
 		running = false;
+		//передаем в рамку параметры в обьект экран 
 		Display.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
+		//метод вызова для работы с графикой
 		graphics = Display.getGraphics();
+		// обьект управление 
 		input = new Input();
+		//добовляем средство вода в экран 
 		Display.addInputListener(input);
+		//адрес картинки в с работой картинок для вырезания 
 		atlas = new TextureAtlas(ATLAS_FILE_NAME);
+		//игрок разположение размер вырезаная картинка 
 		player = new Player(300, 300, 2, 3, atlas);
 	}
 	//Этот метод запускает выполнение потока,
