@@ -3,7 +3,7 @@ package game;
 import java.awt.Graphics2D;
 
 import IO.Input;
-
+//получить игрока и его новое положение 
 public abstract class Entity {
 
 	public final EntityType	type;

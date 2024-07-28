@@ -3,7 +3,7 @@ package graphics;
 import java.awt.image.BufferedImage;
 
 import utils.ResourceLoader;
-
+//идем в ресурс где лежит картинка 
 public class TextureAtlas {
 
 	BufferedImage	image;

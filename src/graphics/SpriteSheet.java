@@ -1,7 +1,7 @@
 package graphics;
 
 import java.awt.image.BufferedImage;
-
+//держит в себе более разрезаем  маленький кусок анимации маленькие танки 
 public class SpriteSheet {
 
 	private BufferedImage	sheet;
@@ -17,7 +17,7 @@ public class SpriteSheet {
 		this.spritesInWidth = sheet.getWidth() / scale;
 
 	}
-
+//математика 
 	public BufferedImage getSprite(int index) {
 
 		index = index % spriteCount;

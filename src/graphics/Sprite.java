@@ -2,7 +2,7 @@ package graphics;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
+//картинка самая маленькая одного танка .
 public class Sprite {
 
 	private SpriteSheet	sheet;
