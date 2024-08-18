@@ -31,7 +31,8 @@ public class Game implements Runnable{
 	private Input				input;
 	private TextureAtlas		atlas;
 	private Player				player;
-	
+	private Wall                wall;
+	//и графику с помощью ссылки вставляем врамку 
    //формируется сама рамка в ней картинка 
 	public Game() {
 		
@@ -46,8 +47,11 @@ public class Game implements Runnable{
 		Display.addInputListener(input);
 		//адрес картинки в с работой картинок для вырезания 
 		atlas = new TextureAtlas(ATLAS_FILE_NAME);
-		//игрок разположение размер вырезаная картинка 
+		
+	    //игрок разположение размер вырезаная картинка 
 		player = new Player(300, 300, 2, 3, atlas);
+		wall = new Wall(250, 200, 4, 4, atlas);
+		
 	}
 	//Этот метод запускает выполнение потока,
 
@@ -85,11 +89,13 @@ public class Game implements Runnable{
 
 	private void update() {
 		player.update(input);
+		wall.update(input);
 	}
 //выводит кадр 
 	private void render() {
 		Display.clear();
 		player.render(graphics);
+		wall.render(graphics);
 		Display.swapBuffers();
 	}
 	//Объекты, реализующие этот интерфейс, могут выполняться потоком

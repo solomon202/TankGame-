@@ -12,8 +12,9 @@ import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 
 public class Player extends Entity {
-
+     //размер спрайта 
 	public static final int	SPRITE_SCALE		= 16;
+	
 	public static final int	SPRITES_PER_HEADING	= 1;
 
 	private enum Heading {
