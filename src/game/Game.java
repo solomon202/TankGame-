@@ -50,7 +50,8 @@ public class Game implements Runnable{
 		
 	    //игрок разположение размер вырезаная картинка 
 		player = new Player(300, 300, 2, 3, atlas);
-		wall = new Wall(250, 200, 4, 4, atlas);
+		//координаты по x и y/  размер /скорость 
+		wall = new Wall(350, 350, 2, 3, atlas);
 		
 	}
 	//Этот метод запускает выполнение потока,

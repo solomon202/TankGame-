@@ -12,7 +12,7 @@ import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 
 public class Wall extends Entity {
-	
+	//МАСШТАБ СПРАЙТА
 	
 public static final int	SPRITE_SCALE		= 16;
 	

@@ -12,11 +12,11 @@ import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 
 public class Player extends Entity {
-     //размер спрайта 
+     //размер спрайта каждого танка 16 на 16 пикселей
 	public static final int	SPRITE_SCALE		= 16;
 	
 	public static final int	SPRITES_PER_HEADING	= 1;
-
+ //поворачиваем танк в какую сторону смотрит наш танк 
 	private enum Heading {
 		NORTH(0 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		EAST(6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
@@ -24,7 +24,7 @@ public class Player extends Entity {
 		WEST(2 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
 
 		private int	x, y, h, w;
-
+//хранит координаты танков 
 		Heading(int x, int y, int h, int w) {
 			this.x = x;
 			this.y = y;
@@ -37,11 +37,12 @@ public class Player extends Entity {
 		}
 	}
 
-	private Heading					heading;
+	private Heading	heading;
+	//вытащить танк в какую сторону смотрит танк
 	private Map<Heading, Sprite>	spriteMap;
 	private float					scale;
 	private float					speed;
-
+//конструктор 
 	public Player(float x, float y, float scale, float speed, TextureAtlas atlas) {
 		super(EntityType.Player, x, y);
 
@@ -57,7 +58,7 @@ public class Player extends Entity {
 		}
 
 	}
-//  
+//  двигаем картинку 
 	@Override
 	public void update(Input input) {
 
