@@ -55,7 +55,7 @@ public static void create(int width, int height, String title, int _clearColor, 
 	window.setLocationRelativeTo(null);
 	window.setVisible(true);
 
-	buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	buffer = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
 	bufferData = ((DataBufferInt) buffer.getRaster().getDataBuffer()).getData();
 	bufferGraphics = buffer.getGraphics();
 	((Graphics2D) bufferGraphics).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

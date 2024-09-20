@@ -47,7 +47,7 @@ public class Game implements Runnable{
 		Display.addInputListener(input);
 		//адрес картинки в с работой картинок для вырезания 
 		atlas = new TextureAtlas(ATLAS_FILE_NAME);
-		
+		//сам танк уже вырезаный 
 	    //игрок разположение размер вырезаная картинка 
 		player = new Player(300, 300, 2, 3, atlas);
 		//координаты по x и y/  размер /скорость 

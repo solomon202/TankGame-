@@ -16,7 +16,7 @@ public class SpriteSheet {
 		this.sheet = sheet;
 		this.spriteCount = spriteCount;
 		this.scale = scale;
-
+ //взять ширину обьщей картинки и разделить на размер одного танка 
 		this.spritesInWidth = sheet.getWidth() / scale;
 
 	}

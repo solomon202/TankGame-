@@ -12,7 +12,7 @@ import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 
 public class Player extends Entity {
-     //размер спрайта каждого танка 16 на 16 пикселей
+     //размер спрайта каждого танка 16 на 16 пикселей.размер одного танка 
 	public static final int	SPRITE_SCALE		= 16;
 	
 	public static final int	SPRITES_PER_HEADING	= 1;
@@ -24,7 +24,7 @@ public class Player extends Entity {
 		WEST(2 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
 
 		private int	x, y, h, w;
-//хранит координаты танков 
+     //хранит координаты танков 
 		Heading(int x, int y, int h, int w) {
 			this.x = x;
 			this.y = y;
