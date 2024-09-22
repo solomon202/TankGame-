@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
+//Для открытия изображения
 public class ResourceLoader {
 
 	public static final String	PATH	= "res/";
