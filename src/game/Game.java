@@ -37,7 +37,7 @@ public class Game implements Runnable{
 	public Game() {
 		
 		running = false;
-		//передаем в рамку параметры в обьект экран 
+		//передаем в дисплей параметры в обьект экран 
 		Display.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
 		//метод вызова для работы с графикой
 		graphics = Display.getGraphics();
