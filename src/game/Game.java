@@ -87,7 +87,7 @@ public class Game implements Runnable{
 		cleanUp();
 
 	}
-
+//метод движения 
 	private void update() {
 		player.update(input);
 		wall.update(input);

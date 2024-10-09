@@ -10,13 +10,14 @@ import IO.Input;
 import graphics.Sprite;
 import graphics.SpriteSheet;
 import graphics.TextureAtlas;
-
+//расширяем класс игрок и его сущьность допуск ко всем методам класса это название и его расположение .
 public class Player extends Entity {
      //размер спрайта каждого танка 16 на 16 пикселей.размер одного танка 
 	public static final int	SPRITE_SCALE		= 16;
 	
 	public static final int	SPRITES_PER_HEADING	= 1;
  //поворачиваем танк в какую сторону смотрит наш танк 
+	//создается только во время компиляции, чтобы определить набор констант. 
 	private enum Heading {
 		NORTH(0 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		EAST(6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
@@ -31,8 +32,9 @@ public class Player extends Entity {
 			this.w = w;
 			this.h = h;
 		}
-
+//получили ссылку на конкретную картинку 
 		protected BufferedImage texture(TextureAtlas atlas) {
+			//и создали новый метод  атласа  с вырезаными  параметрами 
 			return atlas.cut(x, y, w, h);
 		}
 	}
@@ -44,6 +46,10 @@ public class Player extends Entity {
 	private float					speed;
 //конструктор 
 	public Player(float x, float y, float scale, float speed, TextureAtlas atlas) {
+		//super должен быть первым выражением в конструкторе.
+		//Когда создается новый объект, сначала должны быть инициализированы все его суперклассы. Это гарантирует, что объект полностью инициализирован перед тем, как к нему будут применены какие-либо действия.
+		//super()используется для вызова конструктора  или как его ещё называют, конструктора по умолчанию родительского класса.
+		//позволяет выполнять некоторую логику перед вызовом super() получая параметры конструктор супер класса
 		super(EntityType.Player, x, y);
 
 		heading = Heading.NORTH;

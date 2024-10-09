@@ -64,7 +64,7 @@ public static void create(int width, int height, String title, int _clearColor, 
 	bufferGraphics = buffer.getGraphics();
 	((Graphics2D) bufferGraphics).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	clearColor = _clearColor; 
-	// Устанавливаем цвет фона = content.getBufferStrategy();
+	
 	content.createBufferStrategy(numBuffers);
 	bufferStrategy = content.getBufferStrategy();
 
@@ -73,13 +73,14 @@ public static void create(int width, int height, String title, int _clearColor, 
 }
 //ОЧИСТИТЬ и заполняет переданный массив переданным значением.
 
-
+//заливка цвета 
 public static void clear() {
 	Arrays.fill(bufferData, clearColor);
 }
 //Двойная буферизация является ничем иным, как техникой, которой предусматривается использование второго (внеэкранного) буфера для отрисовки фигур, спрайтов и так далее в него, с последующим копированием его содержания в экранный. Проблема в том, что при рисовании напрямую, т.е. рисование непосредственно в экранный буфер по времени не укладывается в промежуток времени перерисовки экрана (в Canvas это осуществляется функцией repaint()) и экран попросту начинает «мигать», т.е. пользователь видит перед собой промежуточный результат этого самого рисования. Использование этой самой технике позволяет разработчику избегать этих «миганий». Тем не менее, в Canvas использование этой техники является процессом велосипедостроения, т.к. разработчики стандарта и платформы J2ME не позаботились об этом.
 public static void swapBuffers() {
 	Graphics g = bufferStrategy.getDrawGraphics();
+	//рисуем картинку
 	g.drawImage(buffer, 0, 0, null);
 	bufferStrategy.show();
 }
@@ -102,7 +103,7 @@ public static void setTitle(String title) {
 	window.setTitle(title);
 
 }
-
+//управление метод
 public static void addInputListener(Input inputListener) {
 	window.add(inputListener);
 }
