@@ -12,6 +12,8 @@ import utils.Time;
 public class Game implements Runnable{
 	
 	//создаем установить  данные переменных 
+	//статические данные запускаются первыми 
+//	Статические элементы родителя Статические элементы наследника Глобальные переменные родителя Конструктор родителя Глобальные переменные наследника Конструктор наследник
 	public static final int		WIDTH			= 800;
 	public static final int		HEIGHT			= 600;
 	public static final String	TITLE			= "Tanks";

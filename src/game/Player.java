@@ -12,27 +12,40 @@ import graphics.SpriteSheet;
 import graphics.TextureAtlas;
 //расширяем класс игрок и его сущьность допуск ко всем методам класса это название и его расположение .
 public class Player extends Entity {
-     //размер спрайта каждого танка 16 на 16 пикселей.размер одного танка 
-	public static final int	SPRITE_SCALE		= 16;
+     //размер спрайта каждого танка 16 на 16 пикселей.размер одного танка на самом полотне 
+	public static final int	SPRITE_SCALE = 16;
 	
 	public static final int	SPRITES_PER_HEADING	= 1;
- //поворачиваем танк в какую сторону смотрит наш танк 
+	//1какие координаты переменные 
+	//2получить координаты метод 
+	//3вырезать кортинку по конкрнтным координатам метод 
+	
+ //картинка танка вырезается куда смотрит танк при нажатии на кнопку поворачиваем танк в какую сторону смотрит наш танк 
 	//создается только во время компиляции, чтобы определить набор констант. 
 	private enum Heading {
+		//размер квадратика на 16 который который перечеляется таких квадратиков в лево в право.
+		//хранит координаты спрайта который нам нужен
+		//north это ссылка (до запитой это по х далее через запяту по у .следующий это второй танк 
 		NORTH(0 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		EAST(6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		SOUTH(4 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		WEST(2 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
-
+ 
 		private int	x, y, h, w;
-     //хранит координаты танков 
+       //а конструктор непосредственно уже получает координаты от выше стоящих параметров потому что конструктор из вне нельзя создать это статический класс 
+	
 		Heading(int x, int y, int h, int w) {
+			//каккую конкретно картинку по иксу 
 			this.x = x;
+			//какую конкретно по у
 			this.y = y;
+			//высота 
 			this.w = w;
+			//ширена
 			this.h = h;
 		}
-//получили ссылку на конкретную картинку 
+		
+        //метод который вырезает уже непосредствено картинку координаты которой передали 
 		protected BufferedImage texture(TextureAtlas atlas) {
 			//и создали новый метод  атласа  с вырезаными  параметрами 
 			return atlas.cut(x, y, w, h);
@@ -41,25 +54,27 @@ public class Player extends Entity {
 
 	private Heading	heading;
 	//вытащить танк в какую сторону смотрит танк
+	//направления танка и выдает  конкретный спрайт который соответствует этому значению  ключю .ключь карта 
 	private Map<Heading, Sprite>	spriteMap;
 	private float					scale;
 	private float					speed;
-//конструктор 
+    //конструктор 
 	public Player(float x, float y, float scale, float speed, TextureAtlas atlas) {
 		//super должен быть первым выражением в конструкторе.
 		//Когда создается новый объект, сначала должны быть инициализированы все его суперклассы. Это гарантирует, что объект полностью инициализирован перед тем, как к нему будут применены какие-либо действия.
 		//super()используется для вызова конструктора  или как его ещё называют, конструктора по умолчанию родительского класса.
 		//позволяет выполнять некоторую логику перед вызовом super() получая параметры конструктор супер класса
 		super(EntityType.Player, x, y);
-
+ 
 		heading = Heading.NORTH;
 		spriteMap = new HashMap<Heading, Sprite>();
 		this.scale = scale;
 		this.speed = speed;
-
+      //сдесь мы храним каждый вырезаный спрайт 
 		for (Heading h : Heading.values()) {
 			SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
 			Sprite sprite = new Sprite(sheet, scale);
+			//связываем каждый спрайт сконкретным направлением ключь значение 
 			spriteMap.put(h, sprite);
 		}
 
