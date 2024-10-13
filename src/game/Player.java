@@ -30,7 +30,7 @@ public class Player extends Entity {
 		EAST(6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		SOUTH(4 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),
 		WEST(2 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE);
- 
+ //этот класс нужен чтобы по определенным координатам вырезать картинку связаную кнопкой
 		private int	x, y, h, w;
        //а конструктор непосредственно уже получает координаты от выше стоящих параметров потому что конструктор из вне нельзя создать это статический класс 
 	
@@ -44,11 +44,11 @@ public class Player extends Entity {
 			//ширена
 			this.h = h;
 		}
-		
+		//этот метод вырезает и вызывается ниже в SpriteSheet
         //метод который вырезает уже непосредствено картинку координаты которой передали х у
 		protected BufferedImage texture(TextureAtlas atlas) {
 			//и создали новый метод  атласа  с вырезаными откуда параметрами и передали куда
-			return atlas.cut(x, y, w, h);
+			return atlas.cut(x, y, w, h);			
 		}
 	}
 
