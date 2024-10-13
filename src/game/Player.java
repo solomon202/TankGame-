@@ -14,7 +14,7 @@ import graphics.TextureAtlas;
 public class Player extends Entity {
      //размер спрайта каждого танка 16 на 16 пикселей.размер одного танка на самом полотне 
 	public static final int	SPRITE_SCALE = 16;
-	
+	//вырезаем один спрайт танк
 	public static final int	SPRITES_PER_HEADING	= 1;
 	//1какие координаты переменные 
 	//2получить координаты метод 
@@ -45,9 +45,9 @@ public class Player extends Entity {
 			this.h = h;
 		}
 		
-        //метод который вырезает уже непосредствено картинку координаты которой передали 
+        //метод который вырезает уже непосредствено картинку координаты которой передали х у
 		protected BufferedImage texture(TextureAtlas atlas) {
-			//и создали новый метод  атласа  с вырезаными  параметрами 
+			//и создали новый метод  атласа  с вырезаными откуда параметрами и передали куда
 			return atlas.cut(x, y, w, h);
 		}
 	}
@@ -58,7 +58,7 @@ public class Player extends Entity {
 	private Map<Heading, Sprite>	spriteMap;
 	private float					scale;
 	private float					speed;
-    //конструктор 
+    //конструктор конкретного танка координаты расположения размер скорость 
 	public Player(float x, float y, float scale, float speed, TextureAtlas atlas) {
 		//super должен быть первым выражением в конструкторе.
 		//Когда создается новый объект, сначала должны быть инициализированы все его суперклассы. Это гарантирует, что объект полностью инициализирован перед тем, как к нему будут применены какие-либо действия.
@@ -71,8 +71,11 @@ public class Player extends Entity {
 		this.scale = scale;
 		this.speed = speed;
       //сдесь мы храним каждый вырезаный спрайт 
+		//пробегаем по списку 
 		for (Heading h : Heading.values()) {
+			//листе спрайтов по 4 изображений на строку.
 			SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
+		//	отдельная картинка 
 			Sprite sprite = new Sprite(sheet, scale);
 			//связываем каждый спрайт сконкретным направлением ключь значение 
 			spriteMap.put(h, sprite);
