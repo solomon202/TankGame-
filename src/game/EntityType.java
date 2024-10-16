@@ -3,7 +3,7 @@ package game;
 //класс перечеслений танки пуля стенки это все энтити 
 public enum EntityType {
 // констант со статическим доступом к ней 
-	Player,Wall;
+	Player,Wall,BrickWall;
 	
 
 }

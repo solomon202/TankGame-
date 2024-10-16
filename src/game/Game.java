@@ -34,6 +34,7 @@ public class Game implements Runnable{
 	private TextureAtlas		atlas;
 	private Player				player;
 	private Wall                wall;
+	private BrickWall           brick;
 	//и графику с помощью ссылки вставляем врамку 
    //формируется сама рамка в ней картинка 
 	public Game() {
@@ -54,6 +55,8 @@ public class Game implements Runnable{
 		player = new Player(300, 300, 2, 3, atlas);
 		//координаты по x и y/  размер /скорость 
 		wall = new Wall(350, 350, 2, 3, atlas);
+		
+		brick = new BrickWall(400,400,3,atlas);
 		
 	}
 	//Этот метод запускает выполнение потока,
