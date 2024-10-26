@@ -58,7 +58,7 @@ public class Player extends Entity {
 	private Map<Heading, Sprite>	spriteMap;
 	private float					scale;
 	private float					speed;
-    //конструктор конкретного танка координаты расположения размер скорость 
+    //конструктор конкретного танка координаты расположения размер скорость  и конкретную вырезаную картинку 
 	public Player(float x, float y, float scale, float speed, TextureAtlas atlas) {
 		//super должен быть первым выражением в конструкторе.
 		//Когда создается новый объект, сначала должны быть инициализированы все его суперклассы. Это гарантирует, что объект полностью инициализирован перед тем, как к нему будут применены какие-либо действия.
@@ -70,12 +70,12 @@ public class Player extends Entity {
 		spriteMap = new HashMap<Heading, Sprite>();
 		this.scale = scale;
 		this.speed = speed;
-      //сдесь мы храним каждый вырезаный спрайт 
+         //сдесь мы храним каждый вырезаный спрайт 
 		//пробегаем по списку 
 		for (Heading h : Heading.values()) {
 			//листе спрайтов по 4 изображений на строку.
 			SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
-		//	отдельная картинка 
+		    //	отдельная картинка 
 			Sprite sprite = new Sprite(sheet, scale);
 			//связываем каждый спрайт сконкретным направлением ключь значение 
 			spriteMap.put(h, sprite);

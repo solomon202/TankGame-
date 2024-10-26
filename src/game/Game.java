@@ -38,7 +38,8 @@ public class Game implements Runnable{
 	//и графику с помощью ссылки вставляем врамку 
    //формируется сама рамка в ней картинка 
 	public Game() {
-		
+		//дисплей для всех поэтому статический 
+		//а воод динамический для всех индивидуальный 
 		running = false;
 		//передаем в дисплей параметры в обьект экран 
 		Display.create(WIDTH, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
@@ -53,10 +54,11 @@ public class Game implements Runnable{
 		//сам танк уже вырезаный 
 	    //игрок разположение размер вырезаная картинка 
 		player = new Player(300, 300, 2, 3, atlas);
+		
 		//координаты по x и y/  размер /скорость 
 		wall = new Wall(350, 350, 2, 3, atlas);
 		
-		brick = new BrickWall(400,400,3,atlas);
+		brick = new BrickWall();
 		
 	}
 	//Этот метод запускает выполнение потока,
@@ -92,16 +94,19 @@ public class Game implements Runnable{
 		cleanUp();
 
 	}
-//метод движения 
+//метод  обработка движения  
 	private void update() {
 		player.update(input);
 		wall.update(input);
+		brick.update(input);
 	}
-//выводит кадр 
+//выводит кадр вывод на экран 
 	private void render() {
 		Display.clear();
 		player.render(graphics);
 		wall.render(graphics);
+		brick.render(graphics,atlas);
+		//graphics.drawImage(atlas.cut(17,6,6,8),300,300,null);
 		Display.swapBuffers();
 	}
 	//Объекты, реализующие этот интерфейс, могут выполняться потоком

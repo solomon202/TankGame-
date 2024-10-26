@@ -8,8 +8,9 @@ public class TextureAtlas {
 //	используется для обработки и манипулирования данными изображения.
 	//Подкласс BufferedImage описывает Image с доступным буфером данных изображения. BufferedImage состоит из ColorModel и Raster данных изображения. 
 	 BufferedImage	image;
-// получает адрес ресурса картинки 
+// получаем адрес и вставили его вкласс ресурс
 	public TextureAtlas(String imageName) {
+		// и теперь есть доступ к картинке 
 		image = ResourceLoader.loadImage(imageName);
 	}
  // резать в классе стена 
@@ -28,4 +29,10 @@ public class TextureAtlas {
 		return image.getSubimage(x, y, w, h);
 	}
 
-}
+	
+	}
+
+	
+	
+
+
