@@ -19,7 +19,7 @@ import com.tank.level.Level;
 import com.tank.graphics.TextureAtlas;
 import com.tank.utils.Time;
 import com.tank.utils.Utils;
-
+//реализации интерфейса содержит основной метод run() — в нём и находится точка входа и логика исполняемого потока.
 public class Game implements Runnable {
 	//static вызываются напрямую через класс, а не через объект.
 	//final защищает переменные, методы и классы от изменений.
@@ -36,10 +36,14 @@ public class Game implements Runnable {
 	private static final float						PLAYER_SPEED	= 3f;
 
 	private static final int						FREEZE_TIME		= 8000;
+	//Реализует методы получения, удаления и вставки в начало, середину и конец списка.
+	//ВРАГ.
 	private static List<Enemy>						enemyList		= new LinkedList<>();
+	//сцена
 	private static int								stage			= 1;
 
 	private static Map<EntityType, List<Bullet>>	bullets;
+	//Объект graphics обычно представляет собой окно или холст, на котором можно рисовать. 
 	private static Graphics2D						graphics;
 	private static boolean							enemiesFrozen;
 	private static long								freezeImposedTime;
@@ -57,13 +61,23 @@ public class Game implements Runnable {
 	private long									timeWin;
 
 	public Game() {
-		running = false;
+		running = false; 
+		//настройки дисплея и создаёт изменяемое по размеру окно с указанными шириной и высотой
+		//и плюс полоска с подсчетом.
 		Display.create(WIDTH + 8 * Level.SCALED_TILE_SIZE, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
+		//Создать объект типа Graphics:метод paintComponent() этого класса можно рисовать на объекте graphics.
+		//Перед началом работы с графикой необходимо создать объект класса Graphics и передать его как аргумент методу paintComponent() класса,
+		//вставляем наш дисплей на холст 
 		graphics = Display.getGraphics();
+		//ввод клава
 		input = new Input();
+		//добавить прослушиватель входных данных
 		Display.addInputListener(input);
+		//адрес текстуры  и работа непосредственно с картинками 
 		atlas = new TextureAtlas(ATLAS_FILE_NAME);
+		//пуля структура данных ключь значение 
 		bullets = new HashMap<>();
+		
 		bullets.put(EntityType.Player, new LinkedList<Bullet>());
 		bullets.put(EntityType.Enemy, new LinkedList<Bullet>());
 		lvl = new Level(atlas, stage);
