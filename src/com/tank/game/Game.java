@@ -61,6 +61,7 @@ public class Game implements Runnable {
 	private long									timeWin;
 
 	public Game() {
+		//пока поток стоит 
 		running = false; 
 		//настройки дисплея и создаёт изменяемое по размеру окно с указанными шириной и высотой
 		//и плюс полоска с подсчетом.
@@ -78,28 +79,42 @@ public class Game implements Runnable {
 		//пуля структура данных ключь значение 
 		bullets = new HashMap<>();
 		
+		//вносим ключь имявраг и игрок  и пулю враг игрок
 		bullets.put(EntityType.Player, new LinkedList<Bullet>());
 		bullets.put(EntityType.Enemy, new LinkedList<Bullet>());
+		//Уровень в него передаем картинку и сцена 
 		lvl = new Level(atlas, stage);
+		//игрок маштаб скорость картинка уровень 
 		player = new Player(SCALE, PLAYER_SPEED, atlas, lvl);
+		//враги замерли
 		enemiesFrozen = false;
+		//количество врагов
 		enemyCount = 20;
+		//время выйгрыша
 		timeWin = 0;
+		//проиграл нет 
 		gameOver = false;
+		//картинка пройгрыша 
+		// так выглядит код int x = 2 * ((5 + 3) * 4 – 8) = 2 * (8 * 4 – 8) = 2 * (32 – 8) = 2 * 24 = 48;
+		//получить цыфру по которой будут получены с помощью метода  пиксили 
 		gameOverImage = Utils.resize(
 				atlas.cut(36 * Level.TILE_SCALE, 23 * Level.TILE_SCALE, 4 * Level.TILE_SCALE, 2 * Level.TILE_SCALE),
 				4 * Level.SCALED_TILE_SIZE, 2 * Level.SCALED_TILE_SIZE);
-		for (int i = 0; i < gameOverImage.getHeight(); i++)
+		//получить высоту изображения < чем высота изображения выйти из цыкла 
+	    	for (int i = 0; i < gameOverImage.getHeight(); i++)
 			for (int j = 0; j < gameOverImage.getWidth(); j++) {
-				int pixel = gameOverImage.getRGB(j, i);
-				if ((pixel & 0x00FFFFFF) < 10)
-					gameOverImage.setRGB(j, i, (pixel & 0x00FFFFFF));
+				//получить все цвета из матрицы по ширене и длине 
+			int pixel = gameOverImage.getRGB(j, i);
+			//из комбинации R Е.Д., G Reen и B LUE цвета.Это дает 256 * 256 * 256 = 16777216 возможных цветов.
+			if ((pixel & 0x00FFFFFF ) < 10)
+					gameOverImage.setRGB(j, i, (pixel & 0x00FFFFFF ));
 			}
 
 	}
-
+   //вызовы методов этого класса в блок synchronized. которые хотим синхранизировать 
 	public synchronized void start() {
-
+    //если поток да то выполняктся поток 
+		//код для исполнения, если истина токод выполняется 
 		if (running)
 			return;
 
@@ -110,7 +125,7 @@ public class Game implements Runnable {
 	}
 
 	public synchronized void stop() {
-
+//если поток нет  то поток не выполняется 
 		if (!running)
 			return;
 
@@ -121,24 +136,33 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+//переход в метод
 		cleanUp();
 
 	}
-
+//обновление 
 	private void update() {
-
+		// задать условие, в соответствии с которым дальнейшая часть программы может быть выполнена
+		//если размер списка 5 врагов не равен  = 0 и количество врагов не равно 0 выигрыш во времени не 0.
 		if (enemyList.size() == 0 && enemyCount == 0 && timeWin == 0)
+			//текущее время в миллисекундах определения времени выполнения операций,
 			timeWin = System.currentTimeMillis();
-
+       // размер врагов количество враго количество жизней не пройгрышь 
 		if (enemyList.size() == 0 && enemyCount == 0 && player.hasMoreLives() && !gameOver)
+			//то следующий уровень
 			nextLevel();
 
 		canCreateEnemy = true;
-
+     //создать врага  
+		//если размер листов врага не больше  4 и количество врагов больше нуля 
 		if (enemyList.size() < 4 && enemyCount > 0) {
+			//то создаем рандомную генератора случайных значений
 			Random rand = new Random();
+		// позицыя по х кразмер экрана  размер спрайта и количесто раз это сгенерировать 
+			//случайное значение  умноженое на размер игры окна и размер спрайта игрока умноженую на маштаб и деленная на два это количество генерации
+			//получаем вероятное число 
 			float possibleX = rand.nextInt(3) * ((Game.WIDTH - Player.SPRITE_SCALE * Game.SCALE) / 2);
+			
 			Rectangle2D.Float recForX = new Rectangle2D.Float(possibleX, 0, Player.SPRITE_SCALE * Game.SCALE,
 					Player.SPRITE_SCALE * Game.SCALE);
 			for (Enemy enemy : enemyList) {

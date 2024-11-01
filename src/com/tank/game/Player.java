@@ -284,7 +284,7 @@ public class Player extends Entity {
 		heading = Heading.NORTH_SIMPLE;
 
 	}
-
+   //жизни 
 	public boolean hasMoreLives() {
 		return lives >= 0;
 	}
