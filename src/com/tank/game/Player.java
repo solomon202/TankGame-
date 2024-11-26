@@ -16,14 +16,16 @@ import com.tank.level.Level;
 import com.tank.graphics.Sprite;
 import com.tank.graphics.SpriteSheet;
 import com.tank.graphics.TextureAtlas;
-
+// Игрок
 public class Player extends Entity {
-
+    //время защиты 
 	private static final int	PROTECTION_TIME	= 4000;
+	//ВНЕШНИЙ ВИД  .  маштаб спрайта .192 по x
 	private static final float	APPEARANCE_X	= Entity.SPRITE_SCALE * Game.SCALE * 4;
 	private static final float	APPEARANCE_Y	= Entity.SPRITE_SCALE * Game.SCALE * 12;
-
+   //движение колекция констант 
 	public enum Heading {
+		//движение по восток запад ключь NORTH_STRONG значение это отдельный спрайт 
 		NORTH_SIMPLE(0 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE), EAST_SIMPLE(
 				6 * SPRITE_SCALE, 0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE), SOUTH_SIMPLE(4 * SPRITE_SCALE,
 						0 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE), WEST_SIMPLE(2 * SPRITE_SCALE,
@@ -38,9 +40,13 @@ public class Player extends Entity {
 				6 * SPRITE_SCALE, 7 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE), SOUTH_STRONG(4 * SPRITE_SCALE,
 						7 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE), WEST_STRONG(2 * SPRITE_SCALE,
 								7 * SPRITE_SCALE, 1 * SPRITE_SCALE, 1 * SPRITE_SCALE),;
-
+//изночальное положение  heading = Heading.NORTH_SIMPLE;
+// при нажатии кнопки	heading = Heading.SOUTH_SIMPLE;
+		// и далие эти координаты передаютсяя в конструктор для вырезания спрайта
+		
+		
 		private int x, y, h, w;
-
+//передаем ключи в них координаты по которым вырезать спрайт 
 		Heading(int x, int y, int h, int w) {
 			this.x = x;
 			this.y = y;
@@ -55,7 +61,7 @@ public class Player extends Entity {
 
 	private static int				lives;
 	private static int				strength;
-
+    
 	private Heading					heading;
 	private Map<Heading, Sprite>	spriteMap;
 	private float					speed;
@@ -93,7 +99,7 @@ public class Player extends Entity {
 
 	@Override
 	public void update(Input input) {
-
+		
 		if (!lvl.isEagleAlive())
 			return;
 

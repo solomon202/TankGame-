@@ -162,35 +162,57 @@ public class Game implements Runnable {
 			//случайное значение  умноженое на размер игры окна и размер спрайта игрока умноженую на маштаб и деленная на два это количество генерации
 			//получаем вероятное число 
 			float possibleX = rand.nextInt(3) * ((Game.WIDTH - Player.SPRITE_SCALE * Game.SCALE) / 2);
-			
+			//создаем прямоугольник и его позицыю 
 			Rectangle2D.Float recForX = new Rectangle2D.Float(possibleX, 0, Player.SPRITE_SCALE * Game.SCALE,
 					Player.SPRITE_SCALE * Game.SCALE);
+			//пробигаем по списку 
 			for (Enemy enemy : enemyList) {
+				//вызываем метод формируем врага 
 				if (enemy.isEvolving()) {
+					//если нет то выход 
 					canCreateEnemy = false;
 					break;
-				}
-
-				if (canCreateEnemy)
+				} 
+				
+				
+               //true (истина) и false (ложь)
+				if (canCreateEnemy)//может создать врага
+					//пересечение .враг получает прямоугольник
 					if (recForX.intersects(enemy.getRectangle())) {
 						canCreateEnemy = false;
 					}
 			}
+			
+			
 			if (canCreateEnemy) {
+				//если игрок не ноль 
 				if (player != null)
+					//обработка столкновений 
 					if (recForX.intersects(player.getRectangle())) {
 						canCreateEnemy = false;
 					}
 				if (canCreateEnemy) {
+					
 					Enemy enemy = null;
+					//минусуем  количество врагов
 					enemyCount--;
+					//уровень 
 					if (stage == 1) {
+						//количество врагов
 						if (enemyCount < 3)
+						//	Вражеская пехотная машина
 							enemy = new EnemyInfantryVehicle(possibleX, 0, SCALE, atlas, lvl);
 						else
+							// создать вражеский танк 
 							enemy = new EnemyTank(possibleX, 0, SCALE, atlas, lvl);
-					} else {
+					} 
+					
+					//иначе
+					else {
 						Random random = new Random();
+						
+						
+						//выбераем нужный 
 						switch (random.nextInt(4)) {
 						case 0:
 							enemy = new EnemyInfantryVehicle(possibleX, 0, SCALE, atlas, lvl);
@@ -202,18 +224,29 @@ public class Game implements Runnable {
 							enemy = new EnemyTank(possibleX, 0, SCALE, atlas, lvl);
 						}
 					}
+					// установить модель игроков.
 					enemy.setPlayer(player);
 					enemyList.add(enemy);
 					;
 				}
 			}
 		}
-
+       //вытащить пулю 
 		List<Bullet> playerBulletList = getBullets(EntityType.Player);
+		//количество пуль больше нуля 
 		if (playerBulletList.size() > 0) {
+			//пробигаем по списку 
 			for (Enemy enemy : enemyList) {
+				
 				if (enemy.isEvolving())
+				//	позволяет пропускать часть кода в теле цикла в определённых ситуациях,
 					continue;
+				//если вражеский прямоугольник пересекается с маркированным списком игроков, то получается прямоугольник
+			    //	&& && маркированный список игроков активен
+                //враг исправляет попадание, игрок получает силу
+                 //маркированный список игроков становится неактивным
+			    //если у врага больше жизней
+				//враг считается мертвым
 				if (enemy.getRectangle().intersects(playerBulletList.get(0).getRectangle())
 						&& playerBulletList.get(0).isActive()) {
 					enemy.fixHitting(Player.getPlayerStrength());
@@ -223,10 +256,11 @@ public class Game implements Runnable {
 				}
 			}
 		}
-
+        //Если определённое условие истинно, то блок операторов выполняется, в противном случае нет
 		if (enemiesFrozen) {
 			if (System.currentTimeMillis() > freezeImposedTime + FREEZE_TIME)
 				enemiesFrozen = false;
+			//Выполняется, если ложно
 		} else {
 			for (Enemy enemy : enemyList)
 				enemy.update(input);
@@ -245,7 +279,7 @@ public class Game implements Runnable {
 			player.update(input);
 
 	}
-
+    //следующий уровень
 	private void nextLevel() {
 
 		if (timeWin == 0 || System.currentTimeMillis() < timeWin + 5000)
@@ -264,7 +298,7 @@ public class Game implements Runnable {
 		timeWin = 0;
 
 	}
-
+   //представляем  всю графику 
 	private void render() {
 
 		Display.clear();
@@ -316,7 +350,7 @@ public class Game implements Runnable {
 		Display.swapBuffers();
 
 	}
-
+   //бежать движение 
 	public void run() {
 
 		int fps = 0;
@@ -371,50 +405,50 @@ public class Game implements Runnable {
 		}
 
 	}
-
+   //   очистить 
 	private void cleanUp() {
 		Display.destroy();
 	}
-
+   //получить врага 
 	public static List<Enemy> getEnemies() {
 		return enemyList;
 	}
-
+  //регистрация пули 
 	public static void registerBullet(EntityType type, Bullet bullet) {
 		bullets.get(type).add(bullet);
 	}
-
+  //незарегистрированная пуля
 	public static void unregisterBullet(EntityType type, Bullet bullet) {
 		if (bullets.get(type).size() > 0) {
 			bullets.get(type).remove(bullet);
 		}
 	}
-
+    //получить пулю
 	public static List<Bullet> getBullets(EntityType type) {
 		return bullets.get(type);
 	}
-
+  //замораживайте врагов
 	public static void freezeEnemies() {
 		enemiesFrozen = true;
 		freezeImposedTime = System.currentTimeMillis();
 
 	}
-
+   //взрывайте врагов
 	public static void detonateEnemies() {
 		for (Enemy enemy : enemyList)
 			enemy.setDead();
 
 	}
-
+    //подсчитайте количество врагов
 	public static int getEnemyCount() {
 		return enemyCount;
 	}
-
+   //Начало игры
 	public static void setGameOver() {
 		gameOver = true;
 
 	}
-
+  //обнуление 
 	public static void reset() {
 
 		bullets = new HashMap<>();

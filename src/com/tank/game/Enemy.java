@@ -214,6 +214,7 @@ public abstract class Enemy extends Entity {
 			drawEvolving(g);
 			return;
 		}
+		//получаем танки врага 
 		spriteMap.get(enemyHeading).render(g, x, y);
 
 	}
