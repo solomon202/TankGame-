@@ -46,14 +46,14 @@ public class Player extends Entity {
 		
 		
 		private int x, y, h, w;
-//передаем ключи в них координаты по которым вырезать спрайт 
+      //передаем ключи в них координаты по которым вырезать спрайт 
 		Heading(int x, int y, int h, int w) {
 			this.x = x;
 			this.y = y;
 			this.w = w;
 			this.h = h;
 		}
-
+     //тип метод вызезания картинки 
 		protected BufferedImage texture(TextureAtlas atlas) {
 			return atlas.cut(x, y, w, h);
 		}
@@ -69,44 +69,60 @@ public class Player extends Entity {
 	private Bullet					bullet;
 	private boolean					isProtected;
 	private List<Sprite>			protectionList;
-
+        //получает маштаб скорость картинка уровень 
 	public Player(float scale, float speed, TextureAtlas atlas, Level lvl) {
+		//конкретную картинку расположение 
 		super(EntityType.Player, APPEARANCE_X, APPEARANCE_Y, scale, atlas, lvl);
-
+        //начальное положение 
 		heading = Heading.NORTH_SIMPLE;
+		//ключь спрайт 
 		spriteMap = new HashMap<Heading, Sprite>();
+		
 		this.speed = speed;
 		bulletSpeed = 6;
 		lives = 2;
+		//прочность 
 		strength = 1;
-
+        
 		isProtected = true;
+		//добовляем обьект в лист 
 		protectionList = new ArrayList<>();
-		protectionList.add(
-				new Sprite(new SpriteSheet(atlas.cut(16 * SPRITE_SCALE, 9 * SPRITE_SCALE, SPRITE_SCALE, SPRITE_SCALE),
+		//ресуем картинку защиты нимб вокруг танка 
+		//лист со спрайтами 
+		//и конкретный спрайт 
+    	protectionList.add(
+	     		new Sprite(new SpriteSheet(atlas.cut(16 * SPRITE_SCALE, 9 * SPRITE_SCALE, SPRITE_SCALE, SPRITE_SCALE),
 						SPRITES_PER_HEADING, SPRITE_SCALE), scale));
 		protectionList.add(
 				new Sprite(new SpriteSheet(atlas.cut(17 * SPRITE_SCALE, 9 * SPRITE_SCALE, SPRITE_SCALE, SPRITE_SCALE),
 						SPRITES_PER_HEADING, SPRITE_SCALE), scale));
-
-		for (Heading h : Heading.values()) {
-			SpriteSheet sheet = new SpriteSheet(h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
-			Sprite sprite = new Sprite(sheet, scale);
-			spriteMap.put(h, sprite);
+         
+		
+		//пробегаем по списку карты 
+		//переменная pet типа Pet, в которой содержится объект класса Pet конструктор 
+		for (Heading h: Heading.values()) {
+			//и создаем страницу спрайта  передавая ссылку
+		    SpriteSheet sheet = new SpriteSheet(
+		    		h.texture(atlas), SPRITES_PER_HEADING, SPRITE_SCALE);
+		    Sprite sprite = new Sprite(sheet, scale);
+	    	spriteMap.put(h, sprite);
 		}
 
 	}
-
+   
 	@Override
 	public void update(Input input) {
 		
+    //if  это  позволяет задать условие, в соответствии с которым дальнейшая часть программы может быть выполнена.		
+		//Жив ли Орел
 		if (!lvl.isEagleAlive())
 			return;
-
+         //сформировался ли сам шаблон танка 
 		if (evolving)
 			return;
-
+      //   текущие время  и созданиеп и  время защиты 
 		if (System.currentTimeMillis() > createdTime + EVOLVING_TIME + PROTECTION_TIME)
+			//находится под защитой
 			isProtected = false;
 
 		float newX = x;

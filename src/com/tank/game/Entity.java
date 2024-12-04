@@ -49,6 +49,8 @@ public abstract class Entity {
 		createdTime = System.currentTimeMillis();
 		animationCount = 0;
 		evolving = true;
+		this.scale = scale;
+		this.atlas = atlas;
 		evolvingList.add(
 				new Sprite(new SpriteSheet(atlas.cut(16 * SPRITE_SCALE, 6 * SPRITE_SCALE, SPRITE_SCALE, SPRITE_SCALE),
 						SPRITES_PER_HEADING, SPRITE_SCALE), scale));
