@@ -71,7 +71,7 @@ public class Player extends Entity {
 	private List<Sprite>			protectionList;
         //получает маштаб скорость картинка уровень 
 	public Player(float scale, float speed, TextureAtlas atlas, Level lvl) {
-		//конкретную картинку расположение 
+		//конкретную картинку расположение передаем  выше к конструктор класса 
 		super(EntityType.Player, APPEARANCE_X, APPEARANCE_Y, scale, atlas, lvl);
         //начальное положение 
 		heading = Heading.NORTH_SIMPLE;
@@ -124,13 +124,16 @@ public class Player extends Entity {
 		if (System.currentTimeMillis() > createdTime + EVOLVING_TIME + PROTECTION_TIME)
 			//находится под защитой
 			isProtected = false;
-
+// класс сущьность это 32-битное число с плавающей точкой
 		float newX = x;
 		float newY = y;
-
+//сначала определяем какая кнопка нажата 
 		if (input.getKey(KeyEvent.VK_UP)) {
+			//при нажатии отняли скорость реакции  и движение по и игрику происходит отнимание двигаясь к нулю 
 			newY -= speed;
+			//маштаб окна игры маштаб жизнейи табло цыфр
 			x = newX = (Math.round(newX / Level.SCALED_TILE_SIZE)) * Level.SCALED_TILE_SIZE;
+			//по каким координатам вырезается спрайт прочность 
 			heading = strength > 1 ? (strength > 2 ? Heading.NORTH_STRONG : Heading.NORTH_MEDIUM)
 					: Heading.NORTH_SIMPLE;
 		} else if (input.getKey(KeyEvent.VK_RIGHT)) {

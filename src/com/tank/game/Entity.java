@@ -26,7 +26,7 @@ public abstract class Entity {
 
 	protected static final int			EVOLVING_TIME		= 1300;
 	protected static final List<Sprite>	evolvingList		= new ArrayList<>();;
-
+// модификатор будут видны внутри пакета, 
 	protected float						x;
 	protected float						y;
 	protected float						scale;
@@ -36,7 +36,7 @@ public abstract class Entity {
 	protected long						createdTime;
 	protected int						animationCount;
 	protected boolean					isAlive;
-
+ //из обстрактного создаем уже конкретную сущьность 
 	protected Entity(EntityType type, float x, float y, float scale, TextureAtlas atlas, Level lvl) {
 		this.type = type;
 		this.x = x;
