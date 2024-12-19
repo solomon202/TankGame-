@@ -30,6 +30,7 @@ public class Game implements Runnable {
 	public static final int							NUM_BUFFERS		= 3;
 	public static final float						UPDATE_RATE		= 60.0f;
 	public static final float						UPDATE_INTERVAL	= Time.SECOND / UPDATE_RATE;
+	//размер танка 
 	public static final float						SCALE			= 3f;
 	public static final long						IDLE_TIME		= 1;
 	public static final String						ATLAS_FILE_NAME	= "texture_atlas.png";

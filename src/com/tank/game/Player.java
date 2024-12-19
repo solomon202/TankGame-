@@ -151,9 +151,10 @@ public class Player extends Entity {
 			heading = strength > 1 ? (strength > 2 ? Heading.WEST_STRONG : Heading.WEST_MEDIUM) : Heading.WEST_SIMPLE;
 
 		}
-
+       //если не равно нулю стоим на месте 
 		if (newX < 0) {
 			newX = 0;
+			//новое положение двигаемся по  х
 		} else if (newX >= Game.WIDTH - SPRITE_SCALE * scale) {
 			newX = Game.WIDTH - SPRITE_SCALE * scale;
 		}
@@ -163,12 +164,14 @@ public class Player extends Entity {
 		} else if (newY >= Game.HEIGHT - SPRITE_SCALE * scale) {
 			newY = Game.HEIGHT - SPRITE_SCALE * scale;
 		}
-
+       //переключатель (направление)ключь
 		switch (heading) {
 		case NORTH_SIMPLE:
 		case NORTH_MEDIUM:
 		case NORTH_STRONG:
+			//Могу двигаться если нет пересечение с врагом проверка 
 			if (canMove(newX, newY, newX + (SPRITE_SCALE * scale / 2), newY, newX + (SPRITE_SCALE * scale), newY)
+					//пересекается с врагом
 					&& !intersectsEnemy(newX, newY)) {
 				x = newX;
 				y = newY;
