@@ -207,10 +207,15 @@ public class Player extends Entity {
 			}
 			break;
 		}
-
+     //список пуль интерфейс list тип Bullet сылка bullets передать метод тип обьекта 
+		//получить пулю конкретную тоесть врага 
 		List<Bullet> bullets = Game.getBullets(EntityType.Enemy);
+		//если она есть 
 		if (bullets != null) {
+			//то пробегаем по списку 
 			for (Bullet enemyBullet : bullets) {
+				//возвращает false без проверки второго операнда.
+				//получаем прямоугольник .пересекает ли пуля его 
 				if (getRectangle().intersects(enemyBullet.getRectangle()) && enemyBullet.isActive()) {
 					if (!isProtected)
 						isAlive = false;
@@ -220,8 +225,10 @@ public class Player extends Entity {
 			}
 
 		}
-
+        //уравень да нет  прямоугольник танка и прямоугольник бонуса 
+		
 		if (lvl.hasBonus() && getRectangle().intersects(lvl.getBonusRectangle())) {
+			//получение конкретного бонуса 
 			Bonus bonus = lvl.getBonus();
 			switch (bonus) {
 			case PROTECTION:
@@ -248,10 +255,16 @@ public class Player extends Entity {
 			lvl.removeBonus();
 
 		}
-
+		//пуля 
+		//если нажата кнопка 
+		//сравниваем пуля вообще существует 
+      //boolean выражение, результатом которого является true или false
 		if (input.getKey(KeyEvent.VK_SPACE)) {
+			//необходимо исполнить, в случае, если условие истинно
 			if (bullet == null || !bullet.isActive()) {
+				
 				if (Game.getBullets(EntityType.Player).size() == 0) {
+					//создаем пулю
 					bullet = new Bullet(x, y, scale, bulletSpeed, heading.toString().substring(0, 4), atlas, lvl,
 							EntityType.Player);
 				}
@@ -259,11 +272,14 @@ public class Player extends Entity {
 		}
 
 	}
-
+     //пересекается с врагом
 	private boolean intersectsEnemy(float newX, float newY) {
+		//список врагов 
 		List<Enemy> enemyList = Game.getEnemies();
+		//вызов квадрата по координатам  
 		Rectangle2D.Float rect = getRectangle(newX, newY);
 		for (Enemy enemy : enemyList) {
+			//если пересекаются то да 
 			if (rect.intersects(enemy.getRectangle()))
 				return true;
 		}
@@ -271,18 +287,22 @@ public class Player extends Entity {
 	}
 
 	@Override
+	//отображает получаем сылку обьекта который ресует 
 	public void render(Graphics2D g) {
+		//да нет 
 		if (evolving) {
+			//формируем ресунок передавая параметры 
 			drawEvolving(g);
 			return;
 		}
+		//положения. картинка. размер картинки 
 		spriteMap.get(heading).render(g, x, y);
 
 		if (isProtected)
 			drawProtection(g);
 
 	}
-
+//ресует защиту 
 	private void drawProtection(Graphics2D g) {
 		if (animationCount % 16 < 8)
 			protectionList.get(0).render(g, x, y);
@@ -291,7 +311,7 @@ public class Player extends Entity {
 		animationCount++;
 
 	}
-
+ //ресуем взрыв 
 	@Override
 	public void drawExplosion(Graphics2D g) {
 		super.drawExplosion(g);
@@ -300,7 +320,7 @@ public class Player extends Entity {
 		else
 			Game.setGameOver();
 	}
-
+//сброс
 	public void reset() {
 		this.x = APPEARANCE_X;
 		this.y = APPEARANCE_Y;
@@ -316,12 +336,12 @@ public class Player extends Entity {
 	public boolean hasMoreLives() {
 		return lives >= 0;
 	}
-
+//жив 
 	@Override
 	public boolean isAlive() {
 		return isAlive;
 	}
-
+//сила танка мощь
 	private void upgrade() {
 		if (++strength > 3)
 			strength = 3;
@@ -360,15 +380,15 @@ public class Player extends Entity {
 		}
 
 	}
-
+//получить жизни игрока 
 	public static int getPlayerLives() {
 		return lives;
 	}
-	
+	//получить силу игрока 
 	public static int getPlayerStrength() {
 		return strength;
 	}
-
+//переходите на Следующий Уровень
 	public void moveOnNextLevel() {
 		this.x = APPEARANCE_X;
 		this.y = APPEARANCE_Y;

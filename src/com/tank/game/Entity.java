@@ -136,17 +136,18 @@ public abstract class Entity {
 
 		float adjustedX = x - SPRITE_SCALE;
 		float adjustedY = y - SPRITE_SCALE;
-
+    
 		SpriteSheet expSheet = new SpriteSheet(
 				atlas.cut(19 * SPRITE_SCALE, 8 * SPRITE_SCALE, 2 * SPRITE_SCALE, 2 * SPRITE_SCALE), SPRITES_PER_HEADING,
 				2 * SPRITE_SCALE);
 		Sprite expSprite = new Sprite(expSheet, scale);
+		
 		SpriteSheet bigExpSheet = new SpriteSheet(
 				atlas.cut(21 * SPRITE_SCALE, 8 * SPRITE_SCALE, 2 * SPRITE_SCALE, 2 * SPRITE_SCALE), SPRITES_PER_HEADING,
 				2 * SPRITE_SCALE);
 		Sprite bigExpSprite = new Sprite(bigExpSheet, scale);
 		long curTime = System.currentTimeMillis();
-
+   
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

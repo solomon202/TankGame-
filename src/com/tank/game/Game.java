@@ -424,7 +424,7 @@ public class Game implements Runnable {
 			bullets.get(type).remove(bullet);
 		}
 	}
-    //получить пулю
+    //получить пулю 
 	public static List<Bullet> getBullets(EntityType type) {
 		return bullets.get(type);
 	}
