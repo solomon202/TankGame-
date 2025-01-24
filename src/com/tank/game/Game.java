@@ -42,7 +42,7 @@ public class Game implements Runnable {
 	private static List<Enemy>						enemyList		= new LinkedList<>();
 	//сцена
 	private static int								stage			= 1;
-
+    
 	private static Map<EntityType, List<Bullet>>	bullets;
 	//Объект graphics обычно представляет собой окно или холст, на котором можно рисовать. 
 	private static Graphics2D						graphics;

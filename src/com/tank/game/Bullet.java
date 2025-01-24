@@ -17,12 +17,12 @@ import com.tank.level.TileType;
 import com.tank.graphics.Sprite;
 import com.tank.graphics.SpriteSheet;
 import com.tank.graphics.TextureAtlas;
-
+//пуля 
 public class Bullet {
-
+ //вырезаем по х 20 по у 6 точка . маштаб + ширена высота 
 	public enum BulletHeading {
 		B_NORTH(20 * com.tank.game.Player.SPRITE_SCALE, 6 * com.tank.game.Player.SPRITE_SCALE + 4, com.tank.game.Player.SPRITE_SCALE / 2,
-				1 * com.tank.game.Player.SPRITE_SCALE / 2), B_EAST(21 * com.tank.game.Player.SPRITE_SCALE + com.tank.game.Player.SPRITE_SCALE / 2,
+				 1 * com.tank.game.Player.SPRITE_SCALE / 2), B_EAST(21 * com.tank.game.Player.SPRITE_SCALE + com.tank.game.Player.SPRITE_SCALE / 2,
 						6 * com.tank.game.Player.SPRITE_SCALE + 4, com.tank.game.Player.SPRITE_SCALE / 2, 1 * com.tank.game.Player.SPRITE_SCALE / 2), B_SOUTH(
 								21 * com.tank.game.Player.SPRITE_SCALE, 6 * com.tank.game.Player.SPRITE_SCALE + 4, com.tank.game.Player.SPRITE_SCALE / 2,
 								1 * com.tank.game.Player.SPRITE_SCALE / 2), B_WEST(20 * com.tank.game.Player.SPRITE_SCALE + com.tank.game.Player.SPRITE_SCALE / 2,
@@ -30,35 +30,47 @@ public class Bullet {
 										1 * com.tank.game.Player.SPRITE_SCALE / 2);
 
 		private int x, y, h, w;
-
+ //вырезать картинки и загнать их в буфер и уже при конкретном нажатии достать нужную картинку 
+		//инцилизируем 
 		BulletHeading(int x, int y, int h, int w) {
 			this.x = x;
 			this.y = y;
 			this.w = w;
 			this.h = h;
 		}
-
+//вырезаем 
 		protected BufferedImage texture(TextureAtlas atlas) {
 			return atlas.cut(x, y, w, h);
 		}
 	}
-
+    //скорость пули определяем тип 
 	private float						speed;
+	//пуля и конкретный спрайт перечесление вырезаных картинок 
 	private Map<BulletHeading, Sprite>	spriteMap;
+	//сылка на тип 
 	private BulletHeading				bulletHeading;
+	//с плавующим размером  направление танка
 	private float						x;
 	private float						y;
+	//маштаб 
 	private float						scale;
+	//активен 
 	private boolean						isActive;
+	//уровень 
 	private Level						lvl;
+	//Тип объекта
 	private com.tank.game.EntityType type;
+	//произвести взрыв 
 	private boolean						explosionDone;
+	//Список взрывоопасных предметов
 	private List<Sprite>				explosionList;
+	//количество анимаций
 	private int							animationCount;
-
+    //конструктор дает начальное состояние   создается в игрок или враг 
+	//направление танка маштаб танка
 	public Bullet(float x, float y, float scale, float speed, String direction, TextureAtlas atlas, Level lvl,
 			com.tank.game.EntityType type) {
-
+      //получить вырезаные картинки пули 
 		spriteMap = new HashMap<BulletHeading, Sprite>();
 		this.lvl = lvl;
 		isActive = true;
@@ -68,6 +80,7 @@ public class Bullet {
 		this.speed = speed;
 		explosionDone = false;
 		explosionList = new ArrayList<>();
+		//вызов метода вырезаем взрыв в пустую в стенку края карты
 		explosionList
 				.add(new Sprite(
 						new SpriteSheet(atlas.cut(16 * com.tank.game.Player.SPRITE_SCALE, 8 * com.tank.game.Player.SPRITE_SCALE,
@@ -83,16 +96,23 @@ public class Bullet {
 						new SpriteSheet(atlas.cut(18 * com.tank.game.Player.SPRITE_SCALE, 8 * com.tank.game.Player.SPRITE_SCALE,
 								com.tank.game.Player.SPRITE_SCALE, com.tank.game.Player.SPRITE_SCALE), com.tank.game.Player.SPRITE_SCALE, com.tank.game.Player.SPRITE_SCALE),
 						scale));
-
+             //пробегаем по пулям  значениям 
 		for (BulletHeading bh : BulletHeading.values()) {
+			//вставляем  вырезаные картинки пуль 
 			SpriteSheet sheet = new SpriteSheet(bh.texture(atlas), com.tank.game.Player.SPRITES_PER_HEADING, com.tank.game.Player.SPRITE_SCALE / 2);
+			//вырезаная картинка маштаба 
 			Sprite sprite = new Sprite(sheet, scale);
+			//момещаем в карты картинки 
 			spriteMap.put(bh, sprite);
 		}
+		//переключатель (направление)положение танка 
 		switch (direction) {
+		//на восток 
 		case "EAST":
+			//вызо пули на восто 
 			bulletHeading = BulletHeading.B_EAST;
-			this.x = x + com.tank.game.Player.SPRITE_SCALE * scale/2;
+			//расположение пули по размерам танка 
+			this.x = x + com.tank.game.Player.SPRITE_SCALE * scale/ 2;
 			this.y = y + (com.tank.game.Player.SPRITE_SCALE * scale) / 4;
 			break;
 		case "NORT":

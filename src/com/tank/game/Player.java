@@ -124,10 +124,10 @@ public class Player extends Entity {
 		if (System.currentTimeMillis() > createdTime + EVOLVING_TIME + PROTECTION_TIME)
 			//находится под защитой
 			isProtected = false;
-// класс сущьность это 32-битное число с плавающей точкой
+         // класс сущьность это 32-битное число с плавающей точкой
 		float newX = x;
 		float newY = y;
-//сначала определяем какая кнопка нажата 
+        //сначала определяем какая кнопка нажата 
 		if (input.getKey(KeyEvent.VK_UP)) {
 			//при нажатии отняли скорость реакции  и движение по и игрику происходит отнимание двигаясь к нулю 
 			newY -= speed;
@@ -320,7 +320,7 @@ public class Player extends Entity {
 		else
 			Game.setGameOver();
 	}
-//сброс
+    //сброс
 	public void reset() {
 		this.x = APPEARANCE_X;
 		this.y = APPEARANCE_Y;
@@ -388,7 +388,7 @@ public class Player extends Entity {
 	public static int getPlayerStrength() {
 		return strength;
 	}
-//переходите на Следующий Уровень
+ //переходите на Следующий Уровень
 	public void moveOnNextLevel() {
 		this.x = APPEARANCE_X;
 		this.y = APPEARANCE_Y;
