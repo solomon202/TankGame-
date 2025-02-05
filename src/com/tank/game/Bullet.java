@@ -134,15 +134,17 @@ public class Bullet {
 		com.tank.game.Game.registerBullet(type, this);
 
 	}
-
+//обновление 
 	public void update() {
-
+//активен не активен 
 		if (!isActive)
 			return;
-
+      //получаем положение пули 
 		switch (bulletHeading) {
+		//двигаем пулю по иксу или по игрику 
 		case B_EAST:
 			x += speed;
+			//передаем размер плитки 
 			if (!canFly(x + com.tank.game.Player.SPRITE_SCALE * scale / 4, y, x + com.tank.game.Player.SPRITE_SCALE * scale / 4,
 					y + com.tank.game.Player.SPRITE_SCALE * scale / 4))
 				isActive = false;
@@ -164,11 +166,16 @@ public class Bullet {
 				isActive = false;
 			break;
 		}
-
+  //если 
+		//если типы равны 
 		if (type == com.tank.game.EntityType.Player) {
+			//вражеские пули вставляем в лист 
 			List<Bullet> enemyBullets = com.tank.game.Game.getBullets(com.tank.game.EntityType.Enemy);
+			//пробегаем по листу 
 			for (Bullet bullet : enemyBullets)
+				// и если пересечение квадратов 
 				if (getRectangle().intersects(bullet.getRectangle())) {
+					//производить взрывы 
 					isActive = false;
 					bullet.setInactive();
 					bullet.disableExplosion();
@@ -176,18 +183,20 @@ public class Bullet {
 				}
 
 		}
-
+ // двигаем пулю до края карты если край карты 
 		if (x < 0 || x >= com.tank.game.Game.WIDTH || y < 0 || y > com.tank.game.Game.HEIGHT) {
 			isActive = false;
 		}
 
 	}
-
+   //ресуем взрыв и удаляем пулю
 	public void render(Graphics2D g) {
+		//если  да да 
 		if (!isActive && explosionDone) {
 			com.tank.game.Game.unregisterBullet(type, this);
 			return;
 		}
+		//рисуем взрыв 
 		if (!isActive)
 			drawExplosion(g);
 
@@ -195,13 +204,13 @@ public class Bullet {
 			spriteMap.get(bulletHeading).render(g, x, y);
 		}
 	}
-
+    //пуля плитка  летит да или нет 
 	private boolean canFly(float startX, float startY, float endX, float endY) {
 		int tileStartX = (int) (startX / Level.SCALED_TILE_SIZE);
 		int tileStartY = (int) (startY / Level.SCALED_TILE_SIZE);
 		int tileEndX = (int) (endX / Level.SCALED_TILE_SIZE);
 		int tileEndY = (int) (endY / Level.SCALED_TILE_SIZE);
-
+     //разрушаемый матерьял или не разрушаемый 
 		Integer[][] tileArray = lvl.getTileMap();
 
 		if (Integer.max(tileStartY, tileEndY) >= tileArray.length
@@ -220,7 +229,7 @@ public class Bullet {
 		} else
 			return true;
 	}
-
+  //Является разрушаемым материалом  кирпичь орел 
 	private boolean isDestroyableTile(int tileNum) {
 		if (tileNum == TileType.BRICK.numeric() || tileNum == TileType.DOWN_LEFT_EAGLE.numeric()
 				|| tileNum == TileType.DOWN_RIGHT_EAGLE.numeric() || tileNum == TileType.UP_LEFT_EAGLE.numeric()
@@ -231,7 +240,7 @@ public class Bullet {
 
 		return false;
 	}
-
+//это Непроходимая Плитка орел
 	private boolean isImpassableTile(Integer... tileNum) {
 		for (int i = 0; i < tileNum.length; i++) {
 			if (tileNum[i] == TileType.BRICK.numeric() || tileNum[i] == TileType.METAL.numeric()
@@ -247,19 +256,20 @@ public class Bullet {
 		}
 		return false;
 	}
-
+ //активен
 	public boolean isActive() {
 		return isActive;
 	}
-
+//получаем прямоугольник
 	public Rectangle2D.Float getRectangle() {
 		return new Rectangle2D.Float(x, y, com.tank.game.Player.SPRITE_SCALE * scale / 2, com.tank.game.Player.SPRITE_SCALE * scale / 2);
+		
 	}
-
+//установлен в активном состоянии
 	public void setInactive() {
 		isActive = false;
 	}
-
+   //нарисуйте взрыв
 	public void drawExplosion(Graphics2D g) {
 		if (explosionDone)
 			return;
@@ -279,7 +289,7 @@ public class Bullet {
 			explosionDone = true;
 
 	}
-
+//отключить взрыв
 	public void disableExplosion() {
 		explosionDone = true;
 	}

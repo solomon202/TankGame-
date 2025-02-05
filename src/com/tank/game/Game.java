@@ -81,7 +81,7 @@ public class Game implements Runnable {
 		bullets = new HashMap<>();
 		
 		//вносим ключь имявраг и игрок  и пулю враг игрок
-		bullets.put(EntityType.Player, new LinkedList<Bullet>());
+    	bullets.put(EntityType.Player, new LinkedList<Bullet>());
 		bullets.put(EntityType.Enemy, new LinkedList<Bullet>());
 		//Уровень в него передаем картинку и сцена 
 		lvl = new Level(atlas, stage);
@@ -414,11 +414,11 @@ public class Game implements Runnable {
 	public static List<Enemy> getEnemies() {
 		return enemyList;
 	}
-  //регистрация пули 
+  //регистрация пули пуля игрока или врага ключь значение 
 	public static void registerBullet(EntityType type, Bullet bullet) {
 		bullets.get(type).add(bullet);
 	}
-  //незарегистрированная пуля
+  //незарегистрированная пуля 
 	public static void unregisterBullet(EntityType type, Bullet bullet) {
 		if (bullets.get(type).size() > 0) {
 			bullets.get(type).remove(bullet);
