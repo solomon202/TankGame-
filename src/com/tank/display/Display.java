@@ -104,7 +104,7 @@ public abstract class Display {
 		window.setTitle(title);
 
 	}
-
+ //добавить компонент по которому кликают 
 	public static void addInputListener(Input inputListener) {
 		window.add(inputListener);
 	}

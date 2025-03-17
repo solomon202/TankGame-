@@ -10,7 +10,10 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 public class Input extends JComponent {
-
+	//Перед началом работы с графикой необходимо создать объект класса Graphics и передать его как аргумент методу paintComponent() класса,
+	//вставляем наш дисплей на холст 
+	
+	
 	private boolean[]	map;
 
 	public Input() {

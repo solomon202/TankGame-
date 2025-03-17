@@ -302,7 +302,7 @@ public class Player extends Entity {
 			drawProtection(g);
 
 	}
-//ресует защиту 
+    //ресует защиту 
 	private void drawProtection(Graphics2D g) {
 		if (animationCount % 16 < 8)
 			protectionList.get(0).render(g, x, y);
@@ -380,7 +380,7 @@ public class Player extends Entity {
 		}
 
 	}
-//получить жизни игрока 
+   //получить жизни игрока 
 	public static int getPlayerLives() {
 		return lives;
 	}
@@ -388,7 +388,7 @@ public class Player extends Entity {
 	public static int getPlayerStrength() {
 		return strength;
 	}
- //переходите на Следующий Уровень
+   //переходите на Следующий Уровень
 	public void moveOnNextLevel() {
 		this.x = APPEARANCE_X;
 		this.y = APPEARANCE_Y;

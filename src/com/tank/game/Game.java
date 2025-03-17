@@ -66,7 +66,7 @@ public class Game implements Runnable {
 		running = false; 
 		//настройки дисплея и создаёт изменяемое по размеру окно с указанными шириной и высотой
 		//и плюс полоска с подсчетом.
-		Display.create(WIDTH + 8 * Level.SCALED_TILE_SIZE, HEIGHT, TITLE, CLEAR_COLOR, NUM_BUFFERS);
+		Display.create(WIDTH + 8 * Level.SCALED_TILE_SIZE, HEIGHT, TITLE,CLEAR_COLOR , NUM_BUFFERS);
 		//Создать объект типа Graphics:метод paintComponent() этого класса можно рисовать на объекте graphics.
 		//Перед началом работы с графикой необходимо создать объект класса Graphics и передать его как аргумент методу paintComponent() класса,
 		//вставляем наш дисплей на холст 

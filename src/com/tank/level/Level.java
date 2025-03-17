@@ -1,5 +1,5 @@
 /**
- * @author Initial version made by https://github.com/TheByteGuru
+ * @author Initial version made by https://github.com/TheByteGur
  * @author Further developed by https://github.com/Wedas/
  */
 
@@ -24,6 +24,7 @@ import com.tank.utils.Utils;
 
 public class Level {
 	public static final int		TILE_SCALE				= 8;
+	//размер плитки с права экрана 
 	public static final int		TILE_IN_GAME_SCALE		= 3;
 	public static final int		SCALED_TILE_SIZE		= TILE_SCALE * TILE_IN_GAME_SCALE;
 	public static final int		TILES_IN_WIDTH			= Game.WIDTH / SCALED_TILE_SIZE;
