@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import com.tank.graphics.TextureAtlas;
 
 public enum Bonus {
-	
+	//определяем что конкретно вырезаем 
 	PROTECTION(16 * com.tank.game.Entity.SPRITE_SCALE, 7 * com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE),
 	FREEZE(17 * com.tank.game.Entity.SPRITE_SCALE, 7 * com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE),
 	SHIELD(18 * com.tank.game.Entity.SPRITE_SCALE, 7 * com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE, com.tank.game.Entity.SPRITE_SCALE),
@@ -24,12 +24,15 @@ public enum Bonus {
 		this.w = w;
 		this.h = h;
 	}
-
+	//вырезаем с помощью метода 
+    //Тип метода в Java обозначает конкретный тип данных, которые метод возвращает после выполнения. 
+	//Если метод не возвращает никакого значения, его возвращаемый тип  данных указывается как void
+	//возвращяется обьектный тип 
 	public BufferedImage texture(TextureAtlas atlas) {
 		return atlas.cut(x, y, w, h);
 	}
-	
-	public static Bonus fromNumeric(int n){
+	//возвращяемый обьектный тип 
+	public static  Bonus fromNumeric(int n){
 		switch(n){
 		case 0:
 			return PROTECTION;

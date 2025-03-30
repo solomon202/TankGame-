@@ -73,8 +73,9 @@ public abstract class Enemy extends Entity {
 		this.speed = speed;
 		bulletSpeed = 4;
 		this.lives = lives;
-
+       //обьект рандом 
 		Random rand = new Random();
+		//генерируем рандомное число до восми если оно равняется 7 то генерируем рандомное число до 6
 		if (rand.nextInt(8) == 7) {
 			bonus = com.tank.game.Bonus.fromNumeric(rand.nextInt(6));
 		}
