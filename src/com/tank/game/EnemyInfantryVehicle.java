@@ -6,8 +6,8 @@ package com.tank.game;
 
 import com.tank.level.Level;
 import com.tank.graphics.TextureAtlas;
-
-public class EnemyInfantryVehicle extends Enemy {
+   
+    public class EnemyInfantryVehicle extends Enemy {
 	private static final int	NORTH_X	= 8;
 	private static final int	NORTH_Y	= 5;
 	private static final float	SPEED	= 2.5f;

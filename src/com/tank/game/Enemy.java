@@ -18,7 +18,7 @@ import com.tank.graphics.Sprite;
 import com.tank.graphics.SpriteSheet;
 import com.tank.graphics.TextureAtlas;
 
-//враг 
+//обстрактный клвсс враги 
 public abstract class Enemy extends Entity {
     //отсрочка  пули 
 	private static final int DELAY = 2000;

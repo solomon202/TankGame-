@@ -4,7 +4,7 @@
  */
 
 package com.tank.game;
-
+//Тип объекта
 public enum EntityType {
 
 	Player,

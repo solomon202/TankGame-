@@ -82,7 +82,7 @@ public class Game implements Runnable {
 		
 		//вносим ключь имявраг и игрок  и пулю враг игрок
     	bullets.put(EntityType.Player, new LinkedList<Bullet>());
-		bullets.put(EntityType.Enemy, new LinkedList<Bullet>());
+    	bullets.put(EntityType.Enemy, new LinkedList<Bullet>());
 		//Уровень в него передаем картинку и сцена 
 		lvl = new Level(atlas, stage);
 		//игрок маштаб скорость картинка уровень 
@@ -126,7 +126,7 @@ public class Game implements Runnable {
 	}
 
 	public synchronized void stop() {
-//если поток нет  то поток не выполняется 
+    //если поток нет  то поток не выполняется 
 		if (!running)
 			return;
 
@@ -137,7 +137,7 @@ public class Game implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-//переход в метод
+     //переход в метод
 		cleanUp();
 
 	}

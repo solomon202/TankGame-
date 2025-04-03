@@ -12,12 +12,12 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
-
+//графический объект
 public class Sprite {
 
-	
+	//картинка со спрайта 
 	private BufferedImage	image;
-	
+	 //она имеет  Лист со спрайтами.размер.
 	public Sprite(SpriteSheet sheet, float scale) {
 		this(sheet, scale, 0, true);
 	}
