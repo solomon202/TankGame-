@@ -133,7 +133,7 @@ public class Player extends Entity {
 			newY -= speed;
 			//маштаб окна игры маштаб жизнейи табло цыфр
 			x = newX = (Math.round(newX / Level.SCALED_TILE_SIZE)) * Level.SCALED_TILE_SIZE;
-			//по каким координатам вырезается спрайт прочность 
+				//по каким координатам вырезается спрайт прочность 
 			heading = strength > 1 ? (strength > 2 ? Heading.NORTH_STRONG : Heading.NORTH_MEDIUM)
 					: Heading.NORTH_SIMPLE;
 		} else if (input.getKey(KeyEvent.VK_RIGHT)) {

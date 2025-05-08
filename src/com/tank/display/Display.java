@@ -87,11 +87,11 @@ public abstract class Display {
 		g.drawImage(buffer, 0, 0, null);
 		bufferStrategy.show();
 	}
-//управлением цветами и размещением текста.  
+    //управлением цветами и размещением текста.  
 	public static Graphics2D getGraphics() {
 		return (Graphics2D) bufferGraphics;
 	}
-  //освобождает все ресурсы экрана
+    //освобождает все ресурсы экрана
 	public static void destroy() {
 
 		if (!created)
@@ -100,13 +100,13 @@ public abstract class Display {
 		window.dispose();
 
 	}
-   //Установить заголовок
+     //Установить заголовок
 	public static void setTitle(String title) {
 
 		window.setTitle(title);
 
 	}
- //добавить компонент по которому кликают 
+    //добавить компонент по которому кликают 
 	public static void addInputListener(Input inputListener) {
 		window.add(inputListener);
 	}

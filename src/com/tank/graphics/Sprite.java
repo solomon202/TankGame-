@@ -15,15 +15,15 @@ import java.awt.image.BufferedImage;
 //графический объект
 public class Sprite {
 
-	//картинка со спрайта 
+	//картинка со спрайта   
 	private BufferedImage	image;
-	 //она имеет  Лист со спрайтами.размер.
+	 //она имеет  Лист со спрайтами.размер.Entity
 	public Sprite(SpriteSheet sheet, float scale) {
 		this(sheet, scale, 0, true);
 	}
-
+     //выход InfoPanel 
 	public Sprite(SpriteSheet sheet, float scale, int spriteNumber, boolean alpha) {
-		
+		//получить метод через сылку 
 		image = sheet.getSprite(spriteNumber);
 		
 		
@@ -38,17 +38,17 @@ public class Sprite {
 		g.dispose();
 		
 	
-	 
-	 if(alpha)
-		for (int i = 0; i < image.getHeight(); i++)
-			for (int j = 0; j < image.getWidth(); j++) {
+	 //if (условие) оператор; // если условие истинно, то выполняется оператор 
+	 if(alpha)//если это является тем том   
+		for (int i = 0; i < image.getHeight(); i++)//если высота картинки проверяем больше 
+			for (int j = 0; j < image.getWidth(); j++) {//если ширина картинки псли меньше то еще дополнительно приваеваем и проверяем стиность 
 				int pixel = image.getRGB(j, i);
 				if ((pixel & 0x00FFFFFF) < 10)
 					image.setRGB(j, i, (pixel & 0x00FFFFFF));
 			}
 			
 	}
-
+   //вырезает спрайт целиком 
 	public void render(Graphics2D g, float x, float y) {
 
 		g.drawImage(image, (int) (x), (int) (y), null);
